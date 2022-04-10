@@ -9,20 +9,25 @@
   - name: p3
     shell: sudo apt upgrade -y && sudo apt install python
 
-  # - name: Clone a github repository
-  #   git:
-  #     repo: https://github.com/shaymelamud95/okta-nodejs-postgres-weight-tracker-example-master.git
-  #     dest: /home/shay/okta-nodejs-postgres-weight-tracker-example-master
-  #     clone: yes
-  #     update: yes
-
-  - name: Recursively remove art1 directory
-    ansible.builtin.file:
-      path: /home/shay/art1
-      state: absent
+  - name: install unzip
+    shell: |
+      if ! command -v unzip
+      then
+        apt-get update
+        apt-get install unzip
+      fi
 
   - name: Copy the artifact from master to machines
     copy: src={{code_path}} dest=/home/shay
+
+  - name: unzip code
+    shell: cd ~ ; sudo unzip -o /home/shay/zipped/zipped.zip -d /home/shay
+
+
+  # - name: Recursively remove art1 directory
+  #   ansible.builtin.file:
+  #     path: /home/shay/art1
+  #     state: absent
 
   - name: install node 
     shell: |
