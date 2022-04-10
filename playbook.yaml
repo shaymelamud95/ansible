@@ -21,7 +21,7 @@
     copy: src={{code_path}} dest=/home/shay
 
   - name: unzip code
-    shell: cd ~ ; sudo unzip -o /home/shay/zipped/zipped.zip -d /home/shay
+    shell: cd ~ ; sudo unzip -o /home/shay/art1/zipped.zip -d /home/shay
 
 
   # - name: Recursively remove art1 directory
