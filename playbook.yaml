@@ -33,6 +33,9 @@
   - name: Docker Pull
     shell: docker pull shaym95/bootcamp:latest
 
+  - name: kill previous docker
+    shell: docker rm -f bootcamp
+
   - name: Run your image as a container 
     shell: docker run -d -p 0.0.0.0:8080:8080/tcp shaym95/bootcamp 
   # - name: install node 
