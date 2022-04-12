@@ -31,7 +31,7 @@
         sh get-docker.sh
       fi
   - name: Docker Pull
-        shell: docker pull shaym95/bootcamp:latest
+    shell: docker pull shaym95/bootcamp:latest
 
   - name: Run your image as a container
     shell: docker run -d shaym95/bootcamp 
