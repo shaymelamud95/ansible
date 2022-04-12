@@ -34,7 +34,7 @@
     shell: docker pull shaym95/bootcamp:latest
 
   - name: Run your image as a container
-    shell: docker run -d shaym95/bootcamp 
+    shell: docker run -d -p 0.0.0.0:8080 shaym95/bootcamp 
   # - name: install node 
   #   shell: |
   #     curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && sudo apt-get install -y nodejs
