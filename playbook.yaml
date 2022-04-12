@@ -75,14 +75,14 @@
     tags:
          - env
 
-  - name: run initdb script
-    shell: cd /home/shay && npm run initdb
-    register: initdb
-    tags:
-      - initdb
-  - debug: msg="{{ initdb.stdout }}"
-    tags:
-      - initdb
+  # - name: run initdb script
+  #   shell: cd /home/shay && npm run initdb
+  #   register: initdb
+  #   tags:
+  #     - initdb
+  # - debug: msg="{{ initdb.stdout }}"
+  #   tags:
+  #     - initdb
 
   # - name: kill
   #   shell: pm2 kill
