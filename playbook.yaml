@@ -70,13 +70,13 @@
       OKTA_ORG_URL={{okta_url}}
       OKTA_CLIENT_ID={{okta_client_id}}
       OKTA_CLIENT_SECRET={{okta_client_secret}}
-      " > art1/.env;
+      " > .env;
     
     tags:
          - env
 
   - name: run initdb script
-    shell: cd /home/shay/art1 && npm run initdb
+    shell: cd /home/shay && npm run initdb
     register: initdb
     tags:
       - initdb
