@@ -9,41 +9,47 @@
   - name: p3
     shell: sudo apt upgrade -y && sudo apt install python
 
-  - name: install unzip
+  # - name: install unzip
+  #   shell: |
+  #     if ! command -v unzip
+  #     then
+  #       apt-get update
+  #       apt-get install unzip
+  #     fi
+
+  # - name: Copy the artifact from master to machines
+  #   copy: src={{code_path}} dest=/home/shay
+
+  # - name: unzip code
+  #   shell: cd ~ ; sudo unzip -o /home/shay/art1/zipped.zip -d /home/shay
+
+  tasks:
+  - name: Docker install
     shell: |
-      if ! command -v unzip
-      then
-        apt-get update
-        apt-get install unzip
+      if ! command -v docker;  then
+        curl -fsSL https://get.docker.com/ -o get-docker.sh;
+        sh get-docker.sh
       fi
+  - name: Docker Pull
+        shell: docker pull uriel/weighttracker:latest
 
-  - name: Copy the artifact from master to machines
-    copy: src={{code_path}} dest=/home/shay
+  - name: Run your image as a container
+    shell: docker run -d shaym95/bootcamp 
+  # - name: install node 
+  #   shell: |
+  #     curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && sudo apt-get install -y nodejs
+  # - name: install pm2
+  #   npm:
+  #     name: pm2
+  #     global: yes
 
-  - name: unzip code
-    shell: cd ~ ; sudo unzip -o /home/shay/art1/zipped.zip -d /home/shay
+  # - name: install pm2 startup
+  #   shell: pm2 startup && sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u shay --hp /home/shay
 
-
-  # - name: Recursively remove art1 directory
-  #   ansible.builtin.file:
+  # - name: Install packages based on package.json using the npm
+  #   npm:
   #     path: /home/shay/art1
-  #     state: absent
-
-  - name: install node 
-    shell: |
-      curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && sudo apt-get install -y nodejs
-  - name: install pm2
-    npm:
-      name: pm2
-      global: yes
-
-  - name: install pm2 startup
-    shell: pm2 startup && sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u shay --hp /home/shay
-
-  - name: Install packages based on package.json using the npm
-    npm:
-      path: /home/shay/art1
-      state: present
+  #     state: present
 
   - name: add .env file
     shell: | 
@@ -78,18 +84,18 @@
     tags:
       - initdb
 
-  - name: kill
-    shell: pm2 kill
-    tags:
-      - kill
+  # - name: kill
+  #   shell: pm2 kill
+  #   tags:
+  #     - kill
       
-  - name: run app as pm2 process
-    shell: cd /home/shay/art1 && pm2 start src/index.js
-    register: out
-    tags:
-      - run
-  - debug: var=out.stdout_lines
+  # - name: run app as pm2 process
+  #   shell: cd /home/shay/art1 && pm2 start src/index.js
+  #   register: out
+  #   tags:
+  #     - run
+  # - debug: var=out.stdout_lines
 
 
-  - name: save process to run at start app
-    shell: pm2 save
+  # - name: save process to run at start app
+  #   shell: pm2 save
