@@ -33,9 +33,9 @@
 
   - name: remove old and unused Docker images
     shell: |
-        if $(docker images shaym95/bootcamp -q); then
-          docker rmi $(docker images shaym95/bootcamp -q)
-        fi
+        if $(sudo docker images shaym95/bootcamp -q); then
+          sudo docker rmi $(sudo docker images shaym95/bootcamp -q)
+        fi  
 
   - name: Docker Pull
     shell: docker pull shaym95/bootcamp:latest
