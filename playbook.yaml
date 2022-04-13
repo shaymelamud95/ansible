@@ -46,22 +46,7 @@
 
   - name: Run your image as a container 
     shell: docker run -d -p 0.0.0.0:8080:8080/tcp shaym95/bootcamp 
-  # - name: install node 
-  #   shell: |
-  #     curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && sudo apt-get install -y nodejs
-  # - name: install pm2
-  #   npm:
-  #     name: pm2
-  #     global: yes
-
-  # - name: install pm2 startup
-  #   shell: pm2 startup && sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u shay --hp /home/shay
-
-  # - name: Install packages based on package.json using the npm
-  #   npm:
-  #     path: /home/shay/art1
-  #     state: present
-
+  
   - name: add .env file
     shell: | 
       echo "
@@ -85,7 +70,12 @@
     
     tags:
          - env
+  - name: copy .env file to the container
+    shell: docker cp ~/.env  $(sudo docker ps -aq):/usr/src/app/.env
 
+  - name: restartthe container
+    shell: docker restart $(sudo docker ps -aq)
+    
   # - name: run initdb script
   #   shell: cd /home/shay && npm run initdb
   #   register: initdb
