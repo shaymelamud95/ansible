@@ -34,6 +34,7 @@
   - name: remove old and unused Docker images
     shell: |
         if $(sudo docker images shaym95/bootcamp -q); then
+          echo 'inside'
           sudo docker rmi $(sudo docker images shaym95/bootcamp -q)
         fi  
 
