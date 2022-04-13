@@ -66,7 +66,7 @@
       OKTA_ORG_URL={{okta_url}}
       OKTA_CLIENT_ID={{okta_client_id}}
       OKTA_CLIENT_SECRET={{okta_client_secret}}
-      " > .env;
+      " > ~/.env;
     
     tags:
          - env
@@ -75,7 +75,7 @@
 
   - name: restartthe container
     shell: docker restart $(sudo docker ps -aq)
-    
+
   # - name: run initdb script
   #   shell: cd /home/shay && npm run initdb
   #   register: initdb
