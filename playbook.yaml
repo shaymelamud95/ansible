@@ -35,7 +35,7 @@
     shell: |
         if [ $(sudo  docker ps -aq | wc -l ) -gt 0 ]; then
           sudo docker rm -f $(sudo docker ps -qa)
-          sudo docker rmi $(sudo docker images shaym95/bootcamp -q)
+          sudo docker rmi -f $(sudo docker images shaym95/bootcamp -q)
         fi  
 
   - name: Docker Pull
