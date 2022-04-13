@@ -30,6 +30,13 @@
         curl -fsSL https://get.docker.com/ -o get-docker.sh;
         sh get-docker.sh
       fi
+
+  - name: remove old and unused Docker images
+    shell: |
+        if $(docker images shaym95/bootcamp -q); then
+          docker rmi $(docker images shaym95/bootcamp -q)
+        fi
+
   - name: Docker Pull
     shell: docker pull shaym95/bootcamp:latest
 
