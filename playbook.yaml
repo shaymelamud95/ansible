@@ -77,7 +77,7 @@
     shell: docker restart $(sudo docker ps -aq)
 
   - name: run initdb script
-    shell: cd /usr/src/app && npm run initdb
+    shell: docker exec $(sudo docker ps -aq) npm run initdb
     register: initdb
     tags:
       - initdb
