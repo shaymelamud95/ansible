@@ -52,7 +52,7 @@
       echo "
       # Host configuration
       PORT=8080
-      HOST={{host}}
+      HOST=0.0.0.0
       # Postgres configuration
       PGHOST={{pghost}}
       PGUSERNAME={{pg_username}}
@@ -76,27 +76,11 @@
   - name: restartthe container
     shell: docker restart $(sudo docker ps -aq)
 
-  # - name: run initdb script
-  #   shell: cd /home/shay && npm run initdb
-  #   register: initdb
-  #   tags:
-  #     - initdb
-  # - debug: msg="{{ initdb.stdout }}"
-  #   tags:
-  #     - initdb
-
-  # - name: kill
-  #   shell: pm2 kill
-  #   tags:
-  #     - kill
-      
-  # - name: run app as pm2 process
-  #   shell: cd /home/shay/art1 && pm2 start src/index.js
-  #   register: out
-  #   tags:
-  #     - run
-  # - debug: var=out.stdout_lines
-
-
-  # - name: save process to run at start app
-  #   shell: pm2 save
+  - name: run initdb script
+    shell: cd /usr/src/app && npm run initdb
+    register: initdb
+    tags:
+      - initdb
+  - debug: msg="{{ initdb.stdout }}"
+    tags:
+      - initdb
