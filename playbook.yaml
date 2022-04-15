@@ -39,15 +39,12 @@
     shell: |
         if [ $(sudo  docker ps -aq | wc -l ) -gt 0 ]; then
           sudo docker rm -f $(sudo docker ps -qa)
-          sudo docker rmi -f $(sudo docker images shaym95/bootcamp -q)
+          sudo docker rmi -f $(sudo docker images -q)
         fi  
 
   - name: Docker Pull
     shell: docker pull shaym95/bootcamp:latest
-
-  - name: kill previous docker
-    shell: docker rm -f bootcamp
-
+    
   - name: add .env file
     shell: | 
       echo "
@@ -71,7 +68,7 @@
     
     tags:
          - env
-         
+
   - name: Run your image as a container 
     shell: docker run -d -p 0.0.0.0:8080:8080/tcp shaym95/bootcamp 
   
