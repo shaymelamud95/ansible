@@ -31,6 +31,10 @@
         sh get-docker.sh
       fi
 
+  - name: docker login
+    shell: |
+      docker login -u {{docker_username}} -p {{docker_password}} {{docker_url}}
+      
   - name: remove old and unused Docker images
     shell: |
         if [ $(sudo  docker ps -aq | wc -l ) -gt 0 ]; then
