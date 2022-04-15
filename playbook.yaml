@@ -1,5 +1,5 @@
 - hosts: webservers
-  become: yes
+  become: true
   gather_facts: no
 
   vars_files:
