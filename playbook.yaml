@@ -34,7 +34,7 @@
   - name: docker login
     shell: |
       docker login -u {{docker_username}} -p {{docker_password}} {{docker_url}}
-      
+
   - name: remove old and unused Docker images
     shell: |
         if [ $(sudo  docker ps -aq | wc -l ) -gt 0 ]; then
@@ -48,9 +48,6 @@
   - name: kill previous docker
     shell: docker rm -f bootcamp
 
-  - name: Run your image as a container 
-    shell: docker run -d -p 0.0.0.0:8080:8080/tcp shaym95/bootcamp 
-  
   - name: add .env file
     shell: | 
       echo "
@@ -74,6 +71,10 @@
     
     tags:
          - env
+         
+  - name: Run your image as a container 
+    shell: docker run -d -p 0.0.0.0:8080:8080/tcp shaym95/bootcamp 
+  
   - name: copy .env file to the container
     shell: docker cp ~/.env  $(sudo docker ps -aq):/usr/src/app/.env
 
