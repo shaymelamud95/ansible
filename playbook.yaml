@@ -79,5 +79,5 @@
     shell: sudo docker restart $(sudo docker ps -aq)
 
   - name: run initdb script
-    shell: docker exec $(sudo docker ps -aq) npm run initdb
+    shell: sudo docker exec $(sudo docker ps -aq) npm run initdb
     run_once: true
