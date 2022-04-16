@@ -9,20 +9,6 @@
   - name: p3
     shell: sudo apt upgrade -y && sudo apt install python
 
-  # - name: install unzip
-  #   shell: |
-  #     if ! command -v unzip
-  #     then
-  #       apt-get update
-  #       apt-get install unzip
-  #     fi
-
-  # - name: Copy the artifact from master to machines
-  #   copy: src={{code_path}} dest=/home/shay
-
-  # - name: unzip code
-  #   shell: cd ~ ; sudo unzip -o /home/shay/art1/zipped.zip -d /home/shay
-
   tasks:
   - name: Docker install
     shell: |
@@ -30,10 +16,6 @@
         curl -fsSL https://get.docker.com/ -o get-docker.sh;
         sh get-docker.sh
       fi
-
-  # - name: docker login
-  #   shell: |
-  #     docker login -u {{docker_username}} -p {{docker_password}} {{docker_url}}
 
   - name: remove old and unused Docker images
     shell: |
