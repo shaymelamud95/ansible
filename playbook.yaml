@@ -70,7 +70,7 @@
          - env
 
   - name: Run your image as a container 
-    shell: docker run -d -p 0.0.0.0:8080:8080/tcp shaym95/bootcamp 
+    shell: docker run -d -p 8080:8080 shaym95/bootcamp 
   
   - name: copy .env file to the container
     shell: docker cp ~/.env  $(sudo docker ps -aq):/usr/src/app/.env
