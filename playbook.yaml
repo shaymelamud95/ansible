@@ -43,7 +43,7 @@
         fi  
 
   - name: Docker Pull
-    shell: docker pull shaym95/bootcamp:latest
+    shell: sudo docker pull shaym95/bootcamp:latest
 
   - name: add .env file
     shell: | 
@@ -70,13 +70,13 @@
          - env
 
   - name: Run your image as a container 
-    shell: docker run -d -p 8080:8080 shaym95/bootcamp 
+    shell: sudo docker run -d -p 8080:8080 shaym95/bootcamp 
   
   - name: copy .env file to the container
     shell: docker cp ~/.env  $(sudo docker ps -aq):/usr/src/app/.env
 
   - name: restartthe container
-    shell: docker restart $(sudo docker ps -aq)
+    shell: sudo docker restart $(sudo docker ps -aq)
 
   - name: run initdb script
     shell: docker exec $(sudo docker ps -aq) npm run initdb
